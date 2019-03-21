@@ -14,10 +14,10 @@ import os
 
 from pandas import DataFrame
 from scipy.constants import alpha
+from sklearn import metrics
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
-# from fastai.fastai import metrics
 
 os.chdir("/Users/ebalboa/Documents/AI-SATURDAYS/20190316/rfr-university-admission-predictor/")
 # Crear dataframe a partir de .csv
@@ -119,7 +119,7 @@ for feat, value in sorted_by_importance:
     print(feat, value)
 
 # Partir el test en cierta proporción (¡experimentar!)
-X_train, X_test, y_train, y_test = train_test_split(indep_df,dep_df,test_size=0.25, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(indep_df, dep_df, test_size=0.2, random_state=42)
 
 ###### Snippet para imprimir resultados, X_train es la variable que refiere
 ###### a la porcion de entrenamiento y X_test a la de test
@@ -141,10 +141,12 @@ y_predict = rfregressor.predict(X_test)
 
 # Calcular la precisión
 # Pista: explorar sklearn.metrics
-# print("Precisión global: " + str(metrics.r2_score(y_test, predicted)))
-# print("MSE: " + str(metrics.mean_squared_error(y_test, predicted)))
 from sklearn.metrics import r2_score
 sco = rfregressor.score(X_test, y_test)
 R2 = r2_score(y_test, y_predict)
 print("R2 : ", R2)
 print("Score : ", sco)
+
+print("Precision global: " + str(metrics.r2_score(y_test, y_predict)))
+print("MSE: " + str(metrics.mean_squared_error(y_test, y_predict)))
+
