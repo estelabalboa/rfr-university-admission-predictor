@@ -38,7 +38,7 @@ display(raw_data.head(2))
 # Simplificamos nombres de columnas para que sea mas fácil.
 renamed_df = raw_data.rename(index=str,
                              columns={"GRE Score": "GRE", "TOEFL Score": "TOEFL", "University Rating": "URat",
-                                      "LOR ": "LOR", "Chance of Admit ": "Chance"})
+                                      "LOR ": "LOR", "Chance of Admit ": "Chance"}).drop(columns={"URat"})
 
 display(renamed_df.head(5))
 
@@ -149,4 +149,6 @@ print("Score : ", sco)
 
 print("Precision global: " + str(metrics.r2_score(y_test, y_predict)))
 print("MSE: " + str(metrics.mean_squared_error(y_test, y_predict)))
+
+# podemos quitar variables como la de distribucion no lineal
 
